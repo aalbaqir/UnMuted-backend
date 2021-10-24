@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+  resources :likes
+  resources :dislikes
+  resources :loves
+  resources :sads
+  resources :reactions
   resources :profiles, only: [:show, :index]
   resources :news_articles, only: [:show]
   resources :comments, only: [:show, :create, :destroy, :update]
@@ -6,7 +11,7 @@ Rails.application.routes.draw do
   post "/login", to: "sessions#create"
   delete "/logout", to: "sessions#destroy"
   get "/me", to: "users#show"
-  get "/profile", to: "profiles#index"
+  get "/yourprofile", to: "profiles#show"
   patch "/profileupdate", to: "users#update"
   post "/enter", to: "comments#create"
 

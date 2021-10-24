@@ -1,18 +1,21 @@
  class UsersController < ApplicationController
+    skip_before_action :authorized
         wrap_parameters format: []
           
+
           def index
-            render json: User.find_by(id: session[:user_id])
+            users = User.all
+            render json: users
           end  
         
         
         def show
             user = User.find_by(id: session[:user_id])
+            byebug
             if user
               render json: user
             else
-              render json: { error: "Not authorized" }, status: :unauthorized
-            #   render cjson: user
+              render json: "who dis?"
         
             end
         end
