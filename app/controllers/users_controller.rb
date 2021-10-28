@@ -11,10 +11,11 @@
         
         def show
             user = User.find_by(id: session[:user_id])
-            byebug
+            # byebug
             if user
-              render json: user
+              render json: user, serializer: ProfileSerializer
             else
+              # byebug
               render json: "who dis?"
         
             end
@@ -40,7 +41,7 @@
           
           def update
             edited_user = User.find_by_id( params[:id] )
-        
+        byebug
             if edited_user.update(user_edit_params)
               render json: edited_user
             else
@@ -63,7 +64,7 @@
           end
         
           def user_edit_params
-            params.permit(:picture, :bio)
+            params.permit(:picture, :email, :name, :country)
           end
         
         

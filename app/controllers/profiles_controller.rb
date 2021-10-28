@@ -11,9 +11,9 @@ class ProfilesController < ApplicationController
         
         
         def show
-            # byebug
-            @profile = Profile.find_by(user_id: session[:user_id])
             byebug
+            profile = Profile.find_by(user_id: session[:user_id])
+            # byebug
             if profile
               render json: profile, serializer: ProfileSerializer
             else

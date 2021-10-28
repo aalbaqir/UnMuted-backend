@@ -1,5 +1,4 @@
 class User < ApplicationRecord
-    has_one :profile
     has_many :comments
     has_many :sad_reactions
     has_many :love_reactions

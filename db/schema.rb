@@ -16,8 +16,10 @@ ActiveRecord::Schema.define(version: 2021_10_22_174426) do
     t.string "entry"
     t.integer "likes"
     t.integer "user_id", null: false
+    t.integer "news_article_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["news_article_id"], name: "index_comments_on_news_article_id"
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
@@ -56,6 +58,7 @@ ActiveRecord::Schema.define(version: 2021_10_22_174426) do
     t.string "author"
     t.string "date"
     t.string "source"
+    t.string "comments"
     t.integer "likes"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -86,10 +89,16 @@ ActiveRecord::Schema.define(version: 2021_10_22_174426) do
   create_table "users", force: :cascade do |t|
     t.string "username"
     t.string "password_digest"
+    t.string "picture"
+    t.string "name"
+    t.string "email"
+    t.string "country"
+    t.string "member_since"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "comments", "news_articles"
   add_foreign_key "comments", "users"
   add_foreign_key "dislikes", "news_articles"
   add_foreign_key "dislikes", "users"

@@ -1,7 +1,9 @@
 class CommentsController < ApplicationController
 
+  skip_before_action :authorized
+
     def index
-        render json: Comment.find_by(id: session[:user_id])
+        render json: Comment.all
       end  
     
     
@@ -40,7 +42,7 @@ class CommentsController < ApplicationController
       private
 
       def new_comment_params
-        params.permit(:entry, :user_id)
+        params.permit(:entry, :user_id, :news_article_id)
           
       end
 
