@@ -1,5 +1,5 @@
  class UsersController < ApplicationController
-    skip_before_action :authorized
+    # skip_before_action :authorized
         wrap_parameters format: []
           
 
@@ -39,15 +39,19 @@
           
           
           
+        
           def update
-            edited_user = User.find_by_id( params[:id] )
-        byebug
-            if edited_user.update(user_edit_params)
-              render json: edited_user
+            byebug
+            edited_user = User.find_by_id(session[:user_id])
+            user_update = edited_user.update(user_edit_params)
+
+            if edited_user
+              # edited_user.update(user_edit_params)
+              render json: user_update
             else
               render json: {errors: edited_user.errors.full_messages}
             end
-        
+
           end
         
           private
@@ -64,7 +68,7 @@
           end
         
           def user_edit_params
-            params.permit(:picture, :email, :name, :country)
+            params.permit(:profile, :picture, :name, :email, :country)
           end
         
         
